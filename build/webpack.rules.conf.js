@@ -21,12 +21,12 @@ const rules = [{
         ]
     }, {
         test: /\.js$/,
-        use: ['babel-loader'],
-        // 不检查node_modules下的js文件
+        // use: ['babel-loader'],
+        loader: 'happypack/loader?id=happy-babel',
         exclude: /node_modules/
     }, {
         test: /\.(css|scss|sass)$/,
-        // use: ['style-loader', 'css-loader', 'sass-loader','postcss-loader'] 区别开发环境和生成环境
+        // mini-css-extract-plugin不支持css热更新,开发环境需要引入'css-hot-loader'
         use: process.env.NODE_ENV === 'development' ? [
             'vue-style-loader',
             'css-loader',
@@ -50,7 +50,7 @@ const rules = [{
     }, {
         test: /\.(png|jpg|gif)$/i,
         use: [{
-            // 需要下载file-loader和url-loader
+            // 依赖file-loader和url-loader
             loader: 'url-loader',
             options: {
                 name: 'assets/img/[name].[hash:7].[ext]',

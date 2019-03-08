@@ -4,7 +4,9 @@ const merge = require('webpack-merge');
 const cleanWebpackPlugin = require('clean-webpack-plugin'); // 清除目录等
 // webpack 4.x 去除了webpack.optimize.UglifyJsPlugin
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -22,17 +24,32 @@ const webpackConfigProd = {
     devtool: 'cheap-module-source-map',
     optimization: {
         minimizer: [
-            new UglifyJSPlugin({
-                cache: true,
-                parallel: true,
-                uglifyOptions: {
+            new ParallelUglifyPlugin({ // 多进程压缩
+                cacheDir: '.cache/',
+                uglifyJS: {
+                    output: {
+                        comments: false,
+                        beautify: false
+                    },
                     compress: {
                         warnings: false,
-                        drop_debugger: true,
-                        drop_console: false
+                        drop_console: true,
+                        collapse_vars: true,
+                        reduce_vars: true
                     }
                 }
             }),
+            // new UglifyJSPlugin({
+            //     cache: true,
+            //     parallel: true,
+            //     uglifyOptions: {
+            //         compress: {
+            //             warnings: false,
+            //             drop_debugger: true,
+            //             drop_console: false
+            //         }
+            //     }
+            // }),
             new OptimizeCSSPlugin({
                 cssProcessorOptions: {
                     safe: true
@@ -66,6 +83,7 @@ const webpackConfigProd = {
                 }
             }
         }),
+        new ProgressBarPlugin()
         // new BundleAnalyzerPlugin()
     ],
     module: {
