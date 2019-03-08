@@ -7,6 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin'); // html模板
 const copyWebpackPlugin = require('copy-webpack-plugin'); // 静态资源输出
 const rules = require('./webpack.rules.conf.js');
+const createHappyPlugin = require('../config/happypack');
 
 const resolvePath = (dir) => {
     return path.resolve(__dirname, '../', dir);
@@ -100,6 +101,7 @@ let baseConfig = {
     },
     // 模块加载配置
     module: {
+        noParse: /jquery|lodash/, // 忽略未采用模块化的文件
         rules: [...rules]
     },
     // 将外部变量或者模块加载进来
@@ -127,7 +129,14 @@ let baseConfig = {
             options: {
                 context: __dirname
             }
-        })
+        }),
+        createHappyPlugin('happy-babel', [{
+            loader: 'babel-loader',
+            options: {
+                babelrc: true,
+                cacheDirectory: true // 启用缓存
+            }
+        }])
     ],
     // webpack4.x移除了commonChunksPulgin插件，放在了config.optimization里面
     optimization: {
