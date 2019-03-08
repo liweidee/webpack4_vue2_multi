@@ -1,0 +1,22 @@
+# 设置根目录 告诉EditorConfig插件不用继续往上查找
+root = true
+
+# 设置匹配范围
+[src/**]
+# 设置字符集
+charset = utf-8
+# 缩进类型
+indent_style = space
+# 缩进空格数
+indent_size = 4
+# 结尾换行符，可选"lf"、"cr"、"crlf"
+end_of_line = lf
+# 在文件结尾插入新行
+insert_final_newline = true
+# 删除一行中前后空格
+trim_trailing_whitespace = true
+
+
+# 对后缀名为 md 的文件生效
+[*.md]
+trim_trailing_whitespace = false

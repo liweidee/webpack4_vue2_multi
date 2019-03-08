@@ -1,0 +1,38 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: "PingFang SC Light", "Heiti SC", "San Francisco", "Helvetica";
+    color: #333;
+    font-size: 14px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+p,
+blockquote {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.35);
+    -webkit-touch-callout: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+i,
+em,
+address,
+cite {
+    font-style: normal;
+}
