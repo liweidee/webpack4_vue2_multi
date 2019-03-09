@@ -17,14 +17,14 @@ const webpackConfigDev = {
         port: "8080",
         overlay: true, // 浏览器页面上显示错误
         open: true, // 开启浏览器
-        // stats: "errors-only", //stats: "errors-only"表示只打印错误：
+        stats: "errors-only", //stats: "errors-only"表示只打印错误：
         hot: true // 开启热更新
     },
     plugins: [
         //热更新
         new webpack.HotModuleReplacementPlugin(),
     ],
-    devtool: "cheap-module-eval-source-map",  // 开启调试模式
+    devtool: "eval-source-map",  // 开启调试模式
     module: {
         rules: []
     },
