@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const cleanWebpackPlugin = require('clean-webpack-plugin'); // 清除目录等
-// webpack 4.x 去除了webpack.optimize.UglifyJsPlugin
+// webpack4.x 移除了webpack.optimize.UglifyJsPlugin
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;

@@ -14,7 +14,7 @@
 
 <style lang="scss">
     body {
-        background: url(../../assets/card_empty@3x.png) no-repeat center / 100% auto;
+        background: url(../../assets/card_empty@3x.png) no-repeat top center / 100% auto;
     }
     .main {width: 100%;}
     .main {
