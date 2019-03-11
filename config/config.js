@@ -34,6 +34,7 @@ const entriesPage = (entryPath => {
             filesList[pathName + '/' + baseName] = entry;
         }
     });
+
     return filesList;
 })(resolvePath('src/pages'));
 
@@ -41,16 +42,17 @@ const entriesPage = (entryPath => {
 const htmlPages = (entriesPage => {
     let resultFiles = [];
 
-    for (let key in entriesPage) {
+    entriesPage.forEach((entry, index) => {
         let htmlPlugin = {
-            filename: key.split('/')[1],
-            filedir: key.split('/')[0],
-            chunks: [key, 'manifest', 'vendor']
+            filename: entry.split('/')[1],
+            filedir: entry.split('/')[0],
+            chunks: [entry, 'manifest', 'vendor']
         };
         resultFiles.push(htmlPlugin);
-    }
+    });
+
     return resultFiles;
-})(entriesPage);
+})(Object.keys(entriesPage));
 
 module.exports = {
 	resolvePath,

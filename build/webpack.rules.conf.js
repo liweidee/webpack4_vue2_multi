@@ -5,10 +5,16 @@ const rules = [{
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-            loaders: {
-                scss: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
-                sass: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
-            }
+            // loaders: {
+            //     scss: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
+            //     sass: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
+            // },
+            // postcss: [
+            //     require('autoprefixer')({
+            //         remove: false,
+            //         browsers: ['last 10 versions']
+            //     })
+            // ]
         }
     }, {
         test: /\.(vue|js)$/,

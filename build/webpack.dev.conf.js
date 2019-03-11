@@ -17,7 +17,14 @@ const webpackConfigDev = {
         port: '8080',
         overlay: true, // 浏览器页面上显示错误
         open: true, // 开启浏览器
-        stats: 'errors-only', //stats: "errors-only"表示只打印错误 minimal/normal/verbose
+        stats: {
+            colors: true,
+            chunks: false,
+            children: false,
+            entrypoints: false,
+            modules: false
+        },
+        // stats: 'errors-only', //stats: "errors-only"表示只打印错误 minimal/normal/verbose
         hot: true // 开启热更新
     },
     plugins: [

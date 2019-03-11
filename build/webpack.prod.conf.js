@@ -17,7 +17,7 @@ const webpackConfigProd = {
         path: path.resolve(__dirname, '../dist'),
         // 打包多出口文件
         filename: '[name].[chunkhash:7].js',
-        publicPath: 'http://127.0.0.1:8888/dist/'
+        publicPath: ''
     },
     optimization: {
         minimizer: [
@@ -47,9 +47,11 @@ const webpackConfigProd = {
             //         }
             //     }
             // }),
+            // 插件内部用的是cssnano做的优化，默认开启 会覆盖掉autoprefixer
             new OptimizeCSSPlugin({
                 cssProcessorOptions: {
-                    safe: true
+                    safe: true,
+                    autoprefixer: false
                 }
             })
         ]
