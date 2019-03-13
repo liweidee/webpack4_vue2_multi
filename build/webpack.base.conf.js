@@ -1,65 +1,15 @@
-const path = require('path');
+// const path = require('path');
 const webpack = require('webpack');
-const glob = require('glob');
-const argv = require('yargs').argv;
+// const glob = require('glob');
+// const argv = require('yargs').argv;
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const htmlWebpackPlugin = require('html-webpack-plugin'); // html模板
 const copyWebpackPlugin = require('copy-webpack-plugin'); // 静态资源输出
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const rules = require('./webpack.rules.conf.js');
 const createHappyPlugin = require('../config/happypack');
-
-const resolvePath = (dir) => {
-    return path.resolve(__dirname, '../', dir);
-};
-
-// 获取入口文件相关方法
-let entriesPage = (entryPath => {
-    let baseName,
-        pathName,
-        filesPath,
-        filesList = {},
-        excludes = [];
-
-    filesPath = glob.sync(`${entryPath}/*/*.js`, {
-        ignore: excludes
-    });
-
-    filesPath.forEach((entry, index) => {
-        baseName = path.basename(entry, path.extname(entry));
-        pathName = entry.split('src/pages/')[1].split('/')[0];
-
-        let pagesEntry = !argv['pages'] ? [] : argv['pages'].split(',');
-        if (pagesEntry.length) {
-            pagesEntry.forEach((item, index) => {
-                if (entry.indexOf(`pages/${item}`) > -1) {
-                    filesList[pathName + '/' + baseName] = entry;
-                }
-            });
-        } else {
-            filesList[pathName + '/' + baseName] = entry;
-        }
-    });
-    // console.log(filesList);
-
-    return filesList;
-})(resolvePath('src/pages'));
-
-//配置页面
-const htmlPages = (entriesPage => {
-    let resultFiles = [];
-
-    for (let key in entriesPage) {
-        let htmlPlugin = {
-            filename: key.split('/')[1],
-            filedir: key.split('/')[0],
-            chunks: [key, 'manifest', 'vendor']
-        };
-        resultFiles.push(htmlPlugin);
-    }
-
-    return resultFiles;
-})(entriesPage);
+const config = require('../config/config');
 
 // 设置html-webpack-plugin参数相关方法
 let getHtmlConfig = (name, dirname, chunks) => {
@@ -90,13 +40,13 @@ let baseConfig = {
         entrypoints: false,
         modules: false
     },
-    entry: entriesPage,
+    entry: config.entriesPage,
     // 模块引用配置
     resolve: {
         extensions: ['.js', '.vue', '.json'], // 定义模块查找的后缀
         alias: { // 定义引用路径别名
             'vue$': 'vue/dist/vue.esm.js',
-            '@': resolvePath('src')
+            '@': config.resolvePath('src')
         }
     },
     // 模块加载配置
@@ -109,6 +59,13 @@ let baseConfig = {
         // 'jquery': 'window.jQuery'
     },
     plugins: [
+        createHappyPlugin('happy-babel', [{
+            loader: 'babel-loader',
+            options: {
+                babelrc: true,
+                cacheDirectory: true // 启用缓存
+            }
+        }]),
         // 全局暴露统一入口
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -118,7 +75,7 @@ let baseConfig = {
         new VueLoaderPlugin(),
         //静态资源输出
         new copyWebpackPlugin([{
-            from: resolvePath('static'),
+            from: config.resolvePath('static'),
             to: './assets',
             ignore: ['.*']
         }]),
@@ -130,13 +87,7 @@ let baseConfig = {
                 context: __dirname
             }
         }),
-        createHappyPlugin('happy-babel', [{
-            loader: 'babel-loader',
-            options: {
-                babelrc: true,
-                cacheDirectory: true // 启用缓存
-            }
-        }])
+        new ProgressBarPlugin()
     ],
     // webpack4.x移除了commonChunksPulgin插件，放在了config.optimization里面
     optimization: {
@@ -158,7 +109,7 @@ let baseConfig = {
 };
 
 //自动生成html模板
-htmlPages.forEach(function(element) {
+config.htmlPages.forEach(function(element) {
     baseConfig.plugins.push(new htmlWebpackPlugin(getHtmlConfig(element.filename, element.filedir, element.chunks)));
 });
 

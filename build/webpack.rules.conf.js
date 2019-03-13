@@ -1,15 +1,20 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const rules = [{
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-            loaders: {
-                scss: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
-                sass: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
-            }
+            // loaders: {
+            //     scss: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
+            //     sass: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
+            // },
+            // postcss: [
+            //     require('autoprefixer')({
+            //         remove: false,
+            //         browsers: ['last 10 versions']
+            //     })
+            // ]
         }
     }, {
         test: /\.(vue|js)$/,
@@ -23,6 +28,7 @@ const rules = [{
         test: /\.js$/,
         // use: ['babel-loader'],
         loader: 'happypack/loader?id=happy-babel',
+        include: path.resolve(__dirname, '../src'),
         exclude: /node_modules/
     }, {
         test: /\.(css|scss|sass)$/,
@@ -33,15 +39,9 @@ const rules = [{
             'postcss-loader',
             'sass-loader',
         ] : [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
-        // use: process.env.NODE_ENV === 'development' ? ['vue-style-loader', 'css-loader', 'sass-loader', 'postcss-loader'] : ExtractTextPlugin.extract({
-        //     fallback: 'vue-style-loader',
-        //     use: ['css-loader', 'sass-loader', 'postcss-loader'],
-        //     // css中的基础路径
-        //     publicPath: '../'
-        // })
     }, {
         test: /\.less$/,
-        // use: ['style-loader', 'css-loader', 'less-loader'] 区别开发环境和生成环境 loader的顺序不能变
+        // use: ['style-loader', 'css-loader', 'less-loader'] loader的顺序不能变
         use: process.env.NODE_ENV === 'development' ? [
             'vue-style-loader',
             'css-loader',

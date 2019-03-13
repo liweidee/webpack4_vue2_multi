@@ -2,13 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const cleanWebpackPlugin = require('clean-webpack-plugin'); // 清除目录等
-// webpack 4.x 去除了webpack.optimize.UglifyJsPlugin
+// webpack4.x 移除了webpack.optimize.UglifyJsPlugin
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const webpackConfigBase = require('./webpack.base.conf');
@@ -19,9 +17,8 @@ const webpackConfigProd = {
         path: path.resolve(__dirname, '../dist'),
         // 打包多出口文件
         filename: '[name].[chunkhash:7].js',
-        publicPath: 'http://127.0.0.1:8888/dist/'
+        publicPath: ''
     },
-    devtool: 'cheap-module-source-map',
     optimization: {
         minimizer: [
             new ParallelUglifyPlugin({ // 多进程压缩
@@ -50,9 +47,11 @@ const webpackConfigProd = {
             //         }
             //     }
             // }),
+            // 插件内部用的是cssnano做的优化，默认开启 会覆盖掉autoprefixer
             new OptimizeCSSPlugin({
                 cssProcessorOptions: {
-                    safe: true
+                    safe: true,
+                    autoprefixer: false
                 }
             })
         ]
@@ -65,10 +64,6 @@ const webpackConfigProd = {
             dry: false
         }),
         // 分离css插件
-        // new ExtractTextPlugin({
-        //     filename: '[name].[hash:7].css',
-        //     allChunks: true
-        // }),
         new MiniCssExtractPlugin({
             filename: '[name].[hash:7].css',
             chunkFilename: '[name].[contenthash:7].css'
@@ -83,7 +78,6 @@ const webpackConfigProd = {
                 }
             }
         }),
-        new ProgressBarPlugin()
         // new BundleAnalyzerPlugin()
     ],
     module: {

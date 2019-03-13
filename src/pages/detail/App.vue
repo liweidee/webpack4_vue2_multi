@@ -14,7 +14,7 @@
 
 <style lang="scss">
     body {
-        background: url(../../assets/card_empty@3x.png) no-repeat center / 100% auto;
+        background: url(../../assets/card_empty@3x.png) no-repeat top center / 100% auto;
     }
     .main {width: 100%;}
     .main {
@@ -28,6 +28,13 @@
             color: #333;
             font-size: 18px;
             text-align: center;
+
+            display: -webkit-box;
+            /* autoprefixer: off */
+            -webkit-box-orient: vertical;
+            /* autoprefixer: on */
+            -webkit-line-clamp: 2;
+            overflow: hidden;
         }
     }
 </style>
