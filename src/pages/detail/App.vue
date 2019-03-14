@@ -6,7 +6,7 @@
     export default {
         data () {
             return {
-                pageData: '我是详情页'
+                pageData: '我是详情页+2'
             };
         }
     };
