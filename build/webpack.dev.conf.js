@@ -17,6 +17,7 @@ const webpackConfigDev = {
         port: '8080',
         overlay: true, // 浏览器页面上显示错误
         open: true, // 开启浏览器
+        hot: true, // 开启热更新
         stats: {
             colors: true,
             chunks: false,
@@ -24,8 +25,30 @@ const webpackConfigDev = {
             entrypoints: false,
             modules: false
         },
-        // stats: 'errors-only', //stats: "errors-only"表示只打印错误 minimal/normal/verbose
-        hot: true // 开启热更新
+        before: function (app, server) {
+            let chunks = Object.keys(webpackConfigBase.entry);
+            app.get('/', (req, res) => {
+                let resHtml = `<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+                    <title>index</title>
+                </head>
+                <body>
+                <ul>`;
+
+                chunks.forEach((chunk, index) => {
+                    resHtml += `<li><a href="${chunk}.html">${chunk}.html</a></li>`;
+                });
+
+                resHtml += `</ul>
+                </body>
+                </html>`;
+
+                res.send(resHtml);
+            });
+        }
     },
     plugins: [
         //热更新

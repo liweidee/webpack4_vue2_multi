@@ -1,7 +1,4 @@
-// const path = require('path');
 const webpack = require('webpack');
-// const glob = require('glob');
-// const argv = require('yargs').argv;
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 const htmlWebpackPlugin = require('html-webpack-plugin'); // html模板
@@ -16,7 +13,7 @@ let getHtmlConfig = (name, dirname, chunks) => {
     return {
         // title: title,
         filename: `${dirname}/${name}.html`,
-        template: `src/pages/${dirname}/${name}.html`,
+        template: `src/pages/${dirname}/${name}.ejs`,
         inject: true,
         // favicon: './favicon.ico',
         hash: false,
@@ -44,9 +41,14 @@ let baseConfig = {
     // 模块引用配置
     resolve: {
         extensions: ['.js', '.vue', '.json'], // 定义模块查找的后缀
+        modules: [
+            'node_modules',
+            config.resolvePath('lib')
+        ],
         alias: { // 定义引用路径别名
             'vue$': 'vue/dist/vue.esm.js',
-            '@': config.resolvePath('src')
+            '@': config.resolvePath('src'),
+            'src': config.resolvePath('src')
         }
     },
     // 模块加载配置

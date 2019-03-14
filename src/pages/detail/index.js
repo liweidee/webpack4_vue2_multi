@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import '../../commons/css/common.css';
+import '../../commons/styles/base.scss';
 
 new Vue({
     el: '#app',

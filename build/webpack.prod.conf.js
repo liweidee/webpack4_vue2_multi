@@ -21,32 +21,32 @@ const webpackConfigProd = {
     },
     optimization: {
         minimizer: [
-            new ParallelUglifyPlugin({ // 多进程压缩
-                cacheDir: '.cache/',
-                uglifyJS: {
-                    output: {
-                        comments: false,
-                        beautify: false
-                    },
-                    compress: {
-                        warnings: false,
-                        drop_console: true,
-                        collapse_vars: true,
-                        reduce_vars: true
-                    }
-                }
-            }),
-            // new UglifyJSPlugin({
-            //     cache: true,
-            //     parallel: true,
-            //     uglifyOptions: {
+            // new ParallelUglifyPlugin({ // 多进程压缩
+            //     cacheDir: '.cache/',
+            //     uglifyJS: {
+            //         output: {
+            //             comments: false,
+            //             beautify: false
+            //         },
             //         compress: {
             //             warnings: false,
-            //             drop_debugger: true,
-            //             drop_console: false
+            //             drop_console: true,
+            //             collapse_vars: true,
+            //             reduce_vars: true
             //         }
             //     }
             // }),
+            new UglifyJSPlugin({
+                cache: true,
+                parallel: true,
+                uglifyOptions: {
+                    compress: {
+                        warnings: false,
+                        drop_debugger: true,
+                        drop_console: true
+                    }
+                }
+            }),
             // 插件内部用的是cssnano做的优化，默认开启 会覆盖掉autoprefixer
             new OptimizeCSSPlugin({
                 cssProcessorOptions: {
