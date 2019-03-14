@@ -3,21 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const rules = [{
         test: /\.vue$/,
-        use: {
-            loader: 'vue-loader',
-            options: {
-                // loaders: {
-                //     scss: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
-                //     sass: MiniCssExtractPlugin.loader + '!css-loader!sass-loader?indentedSyntax',
-                // },
-                // postcss: [
-                //     require('autoprefixer')({
-                //         remove: false,
-                //         browsers: ['last 10 versions']
-                //     })
-                // ]
-            }
-        }
+        use: ['vue-loader']
     }, {
         test: /\.(vue|js)$/,
         loader: 'eslint-loader',
@@ -30,7 +16,6 @@ const rules = [{
         test: /\.js$/,
         // use: ['babel-loader'],
         use: ['happypack/loader?id=happy-babel'],
-        include: path.resolve(__dirname, '../src'),
         exclude: /node_modules/
     }, {
         test: /\.(css|scss|sass)$/,
