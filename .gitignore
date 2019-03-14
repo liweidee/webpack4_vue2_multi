@@ -6,3 +6,4 @@ dist/
 # Editor directories and files
 .idea
 .vscode
+ignore.js
