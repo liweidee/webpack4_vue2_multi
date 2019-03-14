@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import 'zdmui/dist/style.css';
-// import ZdmUI from 'zdmui';
+import ZdmUI from 'zdmui';
 
 // 引入字体图标
 import '../../commons/styles/zdm_icon/style.css';
@@ -8,7 +8,7 @@ import '../../commons/styles/zdm_icon/style.css';
 import App from './App';
 
 const Main = Vue.component('app', App);
-// Vue.use(ZdmUI);
+Vue.use(ZdmUI);
 
 // 引入mockjs
 // require('./apis/mock.js');
