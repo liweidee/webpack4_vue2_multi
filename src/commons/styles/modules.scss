@@ -1,0 +1,246 @@
+@import './var.scss';
+@import './mixins.scss';
+
+/*
+ * 存放页面module共用的样式，不属于zdmui库，要区分开来
+ */
+.text-red{
+    color: $color-red;
+}
+
+.img-icons{
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background-image: url('../../assets/icons@3x.png');
+    background-size: 13px 43px;
+    background-repeat: no-repeat;
+}
+.icon-comments{
+    background-position: 0 -13px;
+}
+.icon-heart{
+    background-position: 0 0;
+}
+.module-title{
+    padding: 0 4%;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 14px;
+    .img-icons{
+        margin-right: 5px;
+        vertical-align: -2px;
+    }
+}
+
+// 相关标签
+.detail-tag-block {
+    & > div {
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    & > ul {
+        padding: 0;
+        margin: 0;
+        //max-height: 76px; bugId: #50264
+        list-style-type: none;
+        overflow: hidden;
+
+        & > li {
+            float: left;
+            margin: 7px 15px 7px 0;
+            padding: 0 10px;
+            height: 24px;
+            line-height: 24px;
+            color: #666;
+            background-color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            border: 0.5px solid #ccc;
+            max-width: 100%;
+            box-sizing: border-box;
+            & > a{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: inline-block;
+                max-width: 100%;
+            }
+        }
+    }
+}
+
+// 关注相关卡片，打赏、栏目模块共用
+.follow-card{
+    position: relative;
+    overflow: hidden;
+
+    .follow-pic{
+        float: left;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        margin-right: 15px;
+        // overflow: hidden;
+        position: relative;
+        img{
+            width: 100%;
+            border-radius: 50%;
+            max-width:100%;
+            max-height: 100%;
+        }
+
+        .author-medal{
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            display: block;
+            right: -4px;
+            bottom: 5px;
+            background-size: 100% 100%;
+            &.yellow-v{
+                background-image: url('../../assets/medal_yellow.png');
+            }
+            &.blue-v{
+                background-image: url('../../assets/medal_blue.png');
+            }
+            &.red-v{
+                background-image: url('../../assets/medal_red.png');
+            }
+        }
+
+    }
+
+    .follow-info{
+        padding-top: 12px;
+
+        &-top{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &-name{
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        &-level{
+            display: inline-block;
+            width: 30px;
+            //height: 12px;
+            margin-left: 5px;
+            border-radius: 2px;
+            background-color: #444;
+            font-size: 8px;
+            color: #fff;
+            line-height: 1.2;
+            padding: 1px 0;
+            text-align: center;
+            vertical-align: 2px;
+            font-weight: bold;
+        }
+
+        .btn-follow{
+            display: inline-block;
+            width: 50px;
+            height: 20px;
+            background-color: #fdfdfd;
+            border: solid 1px $color-red;
+            line-height: 20px;
+            border-radius: 3px;
+            text-align: center;
+            color: $color-red;
+            font-size: 12px;
+            font-weight: bold;
+            &.followed{
+                border-color: #999;
+                color: #999;
+            }
+
+            &>i{
+                display: inline-block;
+                margin-right: 3px;
+                font-size: 6px;
+                vertical-align: 1.5px;
+                font-weight: bold;
+            }
+        }
+
+        &-btm{
+            height: 26px;
+            margin-top: 3px;
+            font-size: 12px;
+            color: #666;
+            line-height: 2.17;
+            @include ellipsis;
+        }
+    }
+
+    .follow-datas{
+        width: 100%;
+        display: -webkit-flex;
+        display: flex;
+        padding: 0;
+        margin: 24px 0 0;
+
+        li{
+            -webkit-flex: 1;
+            flex: 1;
+            list-style: none;
+            border-right: 1px solid #e3e3e3;
+            height: 12px;
+            font-size: 12px;
+            color: #666;
+            line-height: 12px;
+            text-align: center;
+
+            .text-red{
+                display: inline-block;
+                font-size: 14px;
+                font-weight: bold;
+                vertical-align: -1px;
+            }
+
+            &:last-child{
+                border-right: none;
+            }
+        }
+    }
+
+    .follow-intro{
+        margin-top: 14px;
+        font-size: 13px;
+        color: #666;
+        line-height: 1.54;
+    }
+}
+
+// 通栏广告
+.stuff-full{
+    position: relative;
+    margin-top: 10px;
+
+    &-tag{
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 13px;
+        border-bottom-left-radius: 2px;
+        padding: 0 5px;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        line-height: 13px;
+        font-size: 10px;
+    }
+
+    img{
+        width: 100%;
+        max-height: 130px;
+    }
+}

@@ -1,0 +1,6 @@
+[submodule "lib/zdmui"]
+	path = lib/zdmui
+	url = https://gitlab-team.smzdm.com/smzdm/m_zdmui.git
+[submodule "lib/mint-ui"]
+	path = lib/mint-ui
+	url = https://gitlab-team.smzdm.com/smzdm/mint-ui.git

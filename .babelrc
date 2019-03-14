@@ -2,5 +2,11 @@
   "presets": [
     "@babel/preset-env"
   ],
-  "plugins": ["syntax-dynamic-import"]
+  "plugins": [
+  	"syntax-dynamic-import",
+  	["component", {
+      "libraryName": "mint-ui",
+      "style": true
+    }]
+  ]
 }
