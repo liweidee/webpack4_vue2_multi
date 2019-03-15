@@ -36,13 +36,3 @@ npm run build -- --pages=page1,page2
 打包page1和page2 多文件用逗号','间隔
 
 ```
-
-## 参考资料
-- [wepack官方文档](https://webpack.js.org/concepts/)
-- [Webpack4不完全迁移指北](https://github.com/dwqs/blog/issues/60)
-- [基于 Webpack4 + Vue 的多页应用解决方案](https://www.jianshu.com/p/c52df2689d34)
-- [webpack4之高级篇](https://juejin.im/post/5ab7c222f265da237f1e4434)
-- [Webpack4优化之路](https://juejin.im/post/5ac42d5c6fb9a028b617b851)
-- [使用webpack4提升180%编译速度](https://juejin.im/entry/5c302140f265da611b587f99)
-- [webpack中的hash、chunkhash、contenthash区别](https://juejin.im/post/5a4502be6fb9a0450d1162ed)
-- [[webpack] devtool里的7种SourceMap模式是什么鬼？](https://juejin.im/post/58293502a0bb9f005767ba2f)
