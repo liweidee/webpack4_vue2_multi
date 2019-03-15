@@ -9,7 +9,7 @@ if (isiOS && /smzdmapp/i.test(ua)) {
     }
 }
 
-module.exports = {
+export default {
     isWkWebview,
     isiOS,
     isAndroid,

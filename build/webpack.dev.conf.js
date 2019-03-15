@@ -1,7 +1,12 @@
 const path = require('path');
+const portfinder = require('portfinder');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackConfigBase = require('./webpack.base.conf');
+const IP = require('../config/get-ip.js');
+
+console.log(IP);
+
 const webpackConfigDev = {
     mode: 'development', // 通过 mode 声明开发环境
     output: {
@@ -13,11 +18,11 @@ const webpackConfigDev = {
     devServer: {
         contentBase: path.join(__dirname, '../dist/'),
         publicPath:'/',
-        host: '127.0.0.1',
-        port: '8080',
-        overlay: true, // 浏览器页面上显示错误
+        host: IP.host,
+        port: 8081,
         open: true, // 开启浏览器
         hot: true, // 开启热更新
+        overlay: true, // 浏览器页面上显示错误
         stats: {
             colors: true,
             chunks: false,
@@ -25,7 +30,7 @@ const webpackConfigDev = {
             entrypoints: false,
             modules: false
         },
-        before: function (app, server) {
+        before: (app, server) => {
             let chunks = Object.keys(webpackConfigBase.entry);
             app.get('/', (req, res) => {
                 let resHtml = `<!DOCTYPE html>
@@ -48,7 +53,10 @@ const webpackConfigDev = {
 
                 res.send(resHtml);
             });
-        }
+        },
+        allowedHosts: [
+            '.smzdm.com'
+        ]
     },
     plugins: [
         //热更新
@@ -58,5 +66,19 @@ const webpackConfigDev = {
     module: {
         rules: []
     },
-}
-module.exports = merge(webpackConfigBase, webpackConfigDev);
+};
+// module.exports = merge(webpackConfigBase, webpackConfigDev);
+module.exports = new Promise((resolve, reject) => {
+    portfinder.basePort = process.env.PORT || webpackConfigDev.devServer.port;
+    portfinder.getPortPromise()
+    .then((port) => {
+        process.env.PORT = port;
+        webpackConfigDev.devServer.port = port;
+
+        resolve(merge(webpackConfigBase, webpackConfigDev));
+    })
+    .catch((err) => {
+        console.log(err);
+        reject(err);
+    });
+});
