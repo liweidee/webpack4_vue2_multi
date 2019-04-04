@@ -14,11 +14,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@liweidee/desktop_apps": "git+https://github.com/liweidee/desktop_apps.git",
     "@babel/core": "^7.3.4",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-transform-runtime": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
-    "@babel/runtime": "^7.3.4",
     "autoprefixer": "^8.5.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-component": "^1.1.1",
@@ -69,7 +68,9 @@
     "yargs": "^13.2.2"
   },
   "dependencies": {
+    "@babel/runtime": "^7.4.3",
     "axios": "^0.18.0",
+    "core-js": "^3.0.0",
     "jquery": "^3.3.1",
     "promise-polyfill": "^8.1.0",
     "vue": "^2.6.7"

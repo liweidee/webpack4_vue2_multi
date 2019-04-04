@@ -48,7 +48,8 @@ let baseConfig = {
         alias: { // 定义引用路径别名
             'vue$': 'vue/dist/vue.esm.js',
             '@': config.resolvePath('src'),
-            'src': config.resolvePath('src')
+            'src': config.resolvePath('src'),
+            'desktop_apps': '@liweidee/desktop_apps'
         }
     },
     // 模块加载配置
