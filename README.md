@@ -1,6 +1,6 @@
 ## webpack4.x + vue2.x多页面
 
-webpack4.x + vue2.x 多入口，多页面项目构建案例
+webpack4.x + vue2.x 多入口，多页面项目构建
 
 **目录说明**
 
