@@ -40,6 +40,7 @@ const webpackConfigProd = {
                 cache: true,
                 parallel: true,
                 uglifyOptions: {
+                    ie8: true,
                     compress: {
                         warnings: false,
                         drop_debugger: true,

@@ -25,7 +25,6 @@
 </template>
 
 <script>
-    import PromisePolyfill from 'src/commons/utils/promise-polyfill';
     import getClient from '../../commons/utils/getClient';
     import copyAlert from './components/copyAlert.vue';
     import ticketItem from './components/ticketItem.vue';
@@ -34,7 +33,6 @@
     import {Toast} from 'mint-ui';
 
     export default {
-        mixins: [PromisePolyfill],
         data () {
             return {
                 pageData: {

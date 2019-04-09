@@ -8,10 +8,7 @@
 </template>
 
 <script>
-    import PromisePolyfill from 'src/commons/utils/promise-polyfill';
-
     export default {
-        mixins: [PromisePolyfill],
         data () {
             return {
                 screenWidth: document.body.clientWidth || document.documentElement.clientWidth

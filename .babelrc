@@ -6,7 +6,8 @@
         "targets": {
           "browsers": ["defaults", "> 1%", "last 2 versions", "not ie <= 8", "ios > 7"]
         },
-        "useBuiltIns": "usage"
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
     ]
   ],
